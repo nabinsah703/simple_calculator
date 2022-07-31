@@ -28,17 +28,63 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final TextEditingController t1 = TextEditingController();
+  final TextEditingController t2 = TextEditingController();
+
+  var number1 = 0, number2 = 0, sum = 0;
+  void doAddition() {
+    setState(() {
+      number1 = int.parse(t1.text);
+      number2 = int.parse(t2.text);
+
+      sum = number1 + number2;
+    });
+  }
+
+  void doSubstract() {
+    setState(() {
+      number1 = int.parse(t1.text);
+      number2 = int.parse(t2.text);
+
+      sum = number1 - number2;
+    });
+  }
+
+  void doMulti() {
+    setState(() {
+      number1 = int.parse(t1.text);
+      number2 = int.parse(t2.text);
+
+      sum = number1 * number2;
+    });
+  }
+
+  void doDivision() {
+    setState(() {
+      number1 = int.parse(t1.text);
+      number2 = int.parse(t2.text);
+
+      sum = number1 ~/ number2;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Simple Calculator'),
+        title: const Center(child: Text('Simple Calculator')),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
+            Text(
+              "Output:$sum",
+              style: const TextStyle(color: Colors.red, fontSize: 40),
+            ),
+            const SizedBox(height: 8),
             TextField(
+              controller: t1,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -49,6 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const SizedBox(height: 8),
             TextField(
+              controller: t2,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -63,12 +110,12 @@ class _MyHomePageState extends State<MyHomePage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: doAddition,
                   child: const Text("+"),
                 ),
                 const SizedBox(height: 8, width: 8),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: doSubstract,
                   child: const Text("-"),
                 ),
               ],
@@ -79,12 +126,12 @@ class _MyHomePageState extends State<MyHomePage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: doMulti,
                   child: const Text("*"),
                 ),
                 const SizedBox(height: 8, width: 8),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: doDivision,
                   child: const Text("/"),
                 ),
               ],
